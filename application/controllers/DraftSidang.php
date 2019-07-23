@@ -81,7 +81,7 @@ class DraftSidang extends CI_Controller{
     }
 
     function laporan(){
-        $data['draftsidang'] = $this->m_draftsidang->show_data_draftsidangs()->result();
+        $data['draftsidang'] = $this->m_draftsidang->show_data_draftsidangs(array('draft_sidang.status'=>null))->result();
         $this->load->view('header');
         $this->load->view('draft-sidang/draft-sidang-laporan', $data);
         $this->load->view('footer');

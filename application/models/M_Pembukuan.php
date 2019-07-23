@@ -48,6 +48,7 @@ class M_Pembukuan extends CI_Model
     $this->db->select('*, dosen.nama as namaDos, mahasiswa.nama as namaMhs');
     $this->db->from('sidang');
     $this->db->join('bimbingan', 'bimbingan.kd_bimbingan=sidang.kd_bimbingan', 'inner');
+    $this->db->join('draft_sidang', 'bimbingan.kd_bimbingan=draft_sidang.kd_bimbingan', 'inner');
     $this->db->join('dosen', 'dosen.nik=bimbingan.nik', 'inner');
     $this->db->join('mahasiswa', 'mahasiswa.npm=bimbingan.npm', 'inner');
     $this->db->join('pembukuan', 'pembukuan.kd_sidang=sidang.kd_sidang', 'inner');
@@ -100,7 +101,8 @@ class M_Pembukuan extends CI_Model
     $this->db->join('dosen', 'dosen.nik=bimbingan.nik', 'inner');
     $this->db->join('mahasiswa', 'mahasiswa.npm=bimbingan.npm', 'inner');
     $this->db->join('pembukuan', 'pembukuan.kd_sidang=sidang.kd_sidang', 'inner');
-    $this->db->like('pembukuan.judul_laporan',$keyword);
+    $this->db->join('draft_sidang', 'bimbingan.kd_bimbingan=draft_sidang.kd_bimbingan', 'inner');
+    $this->db->like('draft_sidang.judul_laporan',$keyword);
     return $this->db->get();
   }
 }

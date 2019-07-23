@@ -88,7 +88,7 @@ class Pembukuan extends CI_Controller{
 
     function laporan(){
         $data['pembukuan'] = $this->m_pembukuan->show_data_pembukuan()->result();
-        $this->load->view('header');
+        $this->load->view('header'); 
         $this->load->view('pembukuan/pembukuan-laporan',$data);
         $this->load->view('footer');
     }
