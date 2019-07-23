@@ -29,40 +29,20 @@
   								<label>Mahasiswa</label>
   								<input type="text" class="form-control" placeholder="Enter ..." value="<?php echo $drfs->npm . ' - ' . $drfs->namaMhs; ?>" name="npm" required readonly>
   							</div>
-  							<div class="col-md-6">
-  								<div class="form-group">
-  									<label>Terlambat</label>
-  									<div class="radio">
-  										<label>
-  											<input type="radio" name="terlambat" <?php echo ($drfs->terlambat == 'iya') ?  "checked" : "";  ?> id="optionsRadios1" value="iya">
-  											Iya
-  										</label>
-  										&nbsp;&nbsp;
-  										<label>
-  											<input type="radio" name="terlambat" <?php echo ($drfs->terlambat == 'tidak') ?  "checked" : "";  ?> id="optionsRadios2" value="tidak">
-  											Tidak
-  										</label>
-  									</div>
+  							<div class="form-group">
+  								<label>Terlambat</label>
+  								<div class="radio">
+  									<label>
+  										<input type="radio" name="terlambat" <?php echo ($drfs->terlambat == 'iya') ?  "checked" : "";  ?> id="optionsRadios1" value="iya">
+  										Iya
+  									</label>
+  									&nbsp;&nbsp;
+  									<label>
+  										<input type="radio" name="terlambat" <?php echo ($drfs->terlambat == 'tidak') ?  "checked" : "";  ?> id="optionsRadios2" value="tidak">
+  										Tidak
+  									</label>
   								</div>
   							</div>
-  							<div class="col-md-6">
-  								<div class="form-group">
-  									<label>Kelengkapan</label>
-  									<div class="checkbox">
-  										<label>
-  											<input type="checkbox" name="cd" value="ada" <?php echo ($drfs->cd == 'ada') ?  "checked" : "";  ?>>
-  											CD
-  										</label>
-  										&nbsp;&nbsp;
-  										<label>
-  											<input type="checkbox" name="laporan" value="ada" <?php echo ($drfs->laporan == 'ada') ?  "checked" : "";  ?>>
-  											Laporan
-  										</label>
-  									</div>
-  								</div>
-  							</div>
-
-
   						</div>
   						<!-- /.col -->
   						<div class="col-lg-6">
@@ -70,6 +50,10 @@
   								<label>Tanggal Pengumpulan</label>
   								<input type="text" class="form-control pull-right" id="datepicker" value="<?php $date = date_create($drfs->tgl_pengumpulan);
 																											echo date_format($date, "m/d/Y"); ?>" required name="tanggal_pengumpulan">
+  							</div>
+  							<div class="form-group">
+  								<label>Judul Laporan</label>
+  								<input type="text" class="form-control" placeholder="Enter ..." name="judul_laporan" required value="<?php echo $drfs->judul_laporan; ?>">
   							</div>
   							<!-- /.col -->
   						</div>
@@ -100,8 +84,7 @@
   							<th>Pembimbing</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>CD</th>
-  							<th>Laporan</th>
+  							<th>Judul Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</thead>
@@ -119,8 +102,7 @@
   								<td><?php echo $ds->namaDos; ?></td>
   								<td><?php echo $ds->tgl_pengumpulan; ?></td>
   								<td><?php echo ucfirst($ds->terlambat); ?></td>
-  								<td><?php echo ($ds->cd == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
-  								<td><?php echo ($ds->laporan == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
+  								<td><?php echo ucwords($ds->judul_laporan); ?></td>
   								<td>
   									<a href="<?php echo base_url('draftsidang/update/' . $ds->kd_bimbingan . '/' . $ds->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
   									<a href="<?php echo base_url('draftsidang/delete_act/' . $ds->kd_bimbingan . '/' . $ds->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
@@ -138,8 +120,7 @@
   							<th>Pembimbing</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>CD</th>
-  							<th>Laporan</th>
+  							<th>Judul Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</tfoot>

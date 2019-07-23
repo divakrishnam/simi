@@ -21,7 +21,8 @@ class Pembukuan extends CI_Controller{
         $date = date_create($this->input->post('tanggal_pembukuan'));
         $tanggal_pembukuan = date_format($date,"Y-m-d");
         $terlambat = $this->input->post('terlambat');
-        $judul_laporan = $this->input->post('judul_laporan');
+        $cd = $this->input->post('cd');
+        $laporan = $this->input->post('laporan'); 
         
         $where = array('sidang.kd_sidang' => $kd_sidang);
         $dt = $this->m_pembukuan->show_data_sidang($where)->row();
@@ -31,7 +32,8 @@ class Pembukuan extends CI_Controller{
             'npm' => $dt->npm,
             'tgl_pembukuan' => $tanggal_pembukuan,
             'terlambat' => $terlambat,
-            'judul_laporan' => $judul_laporan
+            'cd' => $cd,
+            'laporan' => $laporan,
         );
 
         $where = array('kd_sidang' => $dt->kd_sidang);
@@ -57,14 +59,16 @@ class Pembukuan extends CI_Controller{
         $date = date_create($this->input->post('tanggal_pembukuan'));
         $tanggal_pembukuan = date_format($date,"Y-m-d");
         $terlambat = $this->input->post('terlambat');
-        $judul_laporan = $this->input->post('judul_laporan');
+        $cd = $this->input->post('cd');
+        $laporan = $this->input->post('laporan'); 
         
         $where = array('pembukuan.kd_sidang' => $kd_sidang, 'pembukuan.npm' => $npm);
 
         $data = array(
             'tgl_pembukuan' => $tanggal_pembukuan,
             'terlambat' => $terlambat,
-            'judul_laporan' => $judul_laporan
+            'cd' => $cd,
+            'laporan' => $laporan,
         );
 
         $this->m_pembukuan->update_data($where, $data); 

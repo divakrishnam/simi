@@ -14,7 +14,7 @@
 
   	<!-- Main content -->
   	<section class="content">
-	  <?php if ($this->session->flashdata('message')) { ?>
+  		<?php if ($this->session->flashdata('message')) { ?>
   			<?php if ($this->session->flashdata('message') == 'simpan') { ?>
   				<div class="alert alert-success alert-dismissible">
   					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -47,43 +47,25 @@
   						<div class="col-md-6">
   							<div class="form-group">
   								<label>Mahasiswa</label>
-  								<select class="form-control select2" style="width: 100%;" name="npm" id="npm" required>
+  								<select class="form-control select2" style="width: 100%;" name="kd_bimbingan" id="npm" required>
   									<option selected disabled>Pilih Mahasiswa</option>
   									<?php foreach ($mahasiswa as $mhs) { ?>
-  										<option value="<?php echo $mhs->npm; ?>"><?php echo $mhs->npm; ?> - <?php echo $mhs->nama; ?></option>
+  										<option value="<?php echo $mhs->kd_bimbingan; ?>"><?php echo $mhs->npm; ?> - <?php echo $mhs->nama; ?></option>
   									<?php } ?>
   								</select>
   							</div>
-  							<div class="col-md-6">
-  								<div class="form-group">
-  									<label>Terlambat</label>
-  									<div class="radio">
-  										<label>
-  											<input type="radio" name="terlambat" id="optionsRadios1" value="iya" required>
-  											Iya
-  										</label>
-  										&nbsp;&nbsp;
-  										<label>
-  											<input type="radio" name="terlambat" id="optionsRadios2" value="tidak">
-  											Tidak
-  										</label>
-  									</div>
-  								</div>
-  							</div>
-  							<div class="col-md-6">
-  								<div class="form-group">
-  									<label>Kelengkapan</label>
-  									<div class="checkbox">
-  										<label>
-  											<input type="checkbox" name="cd" value="ada">
-  											CD
-  										</label>
-  										&nbsp;&nbsp;
-  										<label>
-  											<input type="checkbox" name="laporan" value="ada">
-  											Laporan
-  										</label>
-  									</div>
+  							<div class="form-group">
+  								<label>Terlambat</label>
+  								<div class="radio">
+  									<label>
+  										<input type="radio" name="terlambat" id="optionsRadios1" value="iya" required>
+  										Iya
+  									</label>
+  									&nbsp;&nbsp;
+  									<label>
+  										<input type="radio" name="terlambat" id="optionsRadios2" value="tidak">
+  										Tidak
+  									</label>
   								</div>
   							</div>
   						</div>
@@ -92,6 +74,10 @@
   							<div class="form-group">
   								<label>Tanggal Pengumpulan</label>
   								<input type="text" class="form-control pull-right" id="datepicker" name="tanggal_pengumpulan" required>
+  							</div>
+  							<div class="form-group">
+  								<label>Judul Laporan</label>
+  								<input type="text" class="form-control" placeholder="Enter ..." name="judul_laporan" required>
   							</div>
   							<!-- /.col -->
   						</div>
@@ -122,8 +108,7 @@
   							<th>Pembimbing</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>CD</th>
-  							<th>Laporan</th>
+  							<th>Judul Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</thead>
@@ -141,11 +126,10 @@
   								<td><?php echo $ds->namaDos; ?></td>
   								<td><?php echo $ds->tgl_pengumpulan; ?></td>
   								<td><?php echo ucfirst($ds->terlambat); ?></td>
-  								<td><?php echo ($ds->cd == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
-  								<td><?php echo ($ds->laporan == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
+  								<td><?php echo ucwords($ds->judul_laporan); ?></td>
   								<td>
-								  <a href="<?php echo base_url('draftsidang/update/' . $ds->kd_bimbingan . '/' . $ds->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
-  										<a href="<?php echo base_url('draftsidang/delete_act/' . $ds->kd_bimbingan . '/' . $ds->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
+  									<a href="<?php echo base_url('draftsidang/update/' . $ds->kd_bimbingan . '/' . $ds->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
+  									<a href="<?php echo base_url('draftsidang/delete_act/' . $ds->kd_bimbingan . '/' . $ds->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
   								</td>
   							</tr>
   						<?php } ?>
@@ -160,8 +144,7 @@
   							<th>Pembimbing</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>CD</th>
-  							<th>Laporan</th>
+  							<th>Judul Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</tfoot>

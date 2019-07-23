@@ -73,9 +73,19 @@
 																																				echo date_format($date, "m/d/Y"); ?>">
   							</div>
   							<div class="form-group">
-  								<label>Judul Laporan</label>
-  								<input type="text" class="form-control" placeholder="Enter ..." name="judul_laporan" required value="<?php echo $pbk->judul_laporan; ?>">
-  							</div>
+  									<label>Kelengkapan</label>
+  									<div class="checkbox">
+  										<label>
+  											<input type="checkbox" name="cd" value="ada" <?php echo ($pbk->cd == 'ada') ?  "checked" : "";  ?>>
+  											CD
+  										</label>
+  										&nbsp;&nbsp;
+  										<label>
+  											<input type="checkbox" name="laporan" value="ada" <?php echo ($pbk->laporan == 'ada') ?  "checked" : "";  ?>>
+  											Laporan
+  										</label>
+  									</div>
+  								</div>
   							<!-- /.col -->
   						</div>
   						<!-- /.row -->
@@ -95,7 +105,7 @@
   			<!-- /.box-header -->
   			<div class="box-body">
   				<table id="example1" class="table table-bordered table-striped">
-  					<thead>
+				  <thead>
   						<tr>
   							<th>No.</th>
   							<th>NPM</th>
@@ -106,7 +116,8 @@
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>Judul Laporan</th>
+  							<th>CD</th>
+  							<th>Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</thead>
@@ -125,10 +136,11 @@
   								<td><?php echo $pbk->tgl_sidang; ?></td>
   								<td><?php echo $pbk->tgl_pembukuan; ?></td>
   								<td><?php echo ucfirst($pbk->terlambat); ?></td>
-  								<td><?php echo ucwords($pbk->judul_laporan); ?></td>
+  								<td><?php echo ($pbk->cd == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
+  								<td><?php echo ($pbk->laporan == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
   								<td>
   									<a href="<?php echo base_url('pembukuan/update/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
-  									<a href="#" class="btn btn-danger btn-flat">Hapus</a>
+  									<a href="<?php echo base_url('pembukuan/delete_act/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
   								</td>
   							</tr>
   						<?php } ?>
@@ -144,7 +156,8 @@
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>Judul Laporan</th>
+  							<th>CD</th>
+  							<th>Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</tfoot>

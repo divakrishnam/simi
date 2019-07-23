@@ -45,7 +45,6 @@ class M_DraftSidang extends CI_Model
   {
     $this->db->select('*, dosen.nama as namaDos, mahasiswa.nama as namaMhs');
     $this->db->from('mahasiswa');
-    $this->db->join('pendaftaran', 'pendaftaran.npm=mahasiswa.npm', 'inner');
     $this->db->join('bimbingan', 'bimbingan.npm=mahasiswa.npm', 'inner');
     $this->db->join('dosen', 'bimbingan.nik=dosen.nik', 'inner');
     $this->db->join('draft_sidang', 'draft_sidang.kd_bimbingan=bimbingan.kd_bimbingan', 'inner');

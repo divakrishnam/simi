@@ -17,29 +17,27 @@ class DraftSidang extends CI_Controller{
     }
 
     function create_act(){
-        $npm = $this->input->post('npm');
+        $kd_bimbingan = $this->input->post('kd_bimbingan');
         $date = date_create($this->input->post('tanggal_pengumpulan'));
         $tanggal_pengumpulan = date_format($date,"Y-m-d");
         $terlambat = $this->input->post('terlambat');
-        $cd = $this->input->post('cd');
-        $laporan = $this->input->post('laporan'); 
+        $judul_laporan = $this->input->post('judul_laporan');
         
-        $where = array('npm' => $npm);
+        $where = array('kd_bimbingan'=> $kd_bimbingan);
         $dt = $this->m_draftsidang->show_data_bimbingan($where)->row();
 
         $data = array(
-            'kd_bimbingan' => $dt->kd_bimbingan,
-            'npm' => $npm,
+            'kd_bimbingan' => $kd_bimbingan,
             'tgl_pengumpulan' => $tanggal_pengumpulan,
             'terlambat' => $terlambat,
-            'cd' => $cd,
-            'laporan' => $laporan,
+            'judul_laporan' => $judul_laporan,
+            'npm'=>$dt->npm
         );
 
         $where = array(
             'status' => null,
             'kd_bimbingan'=> $dt->kd_bimbingan, 
-            'npm'=>$npm
+            'npm'=>$dt->npm
         );
 
         $this->m_draftsidang->input_data($data, $where); 
@@ -60,16 +58,14 @@ class DraftSidang extends CI_Controller{
         $date = date_create($this->input->post('tanggal_pengumpulan'));
         $tanggal_pengumpulan = date_format($date,"Y-m-d");
         $terlambat = $this->input->post('terlambat');
-        $cd = $this->input->post('cd');
-        $laporan = $this->input->post('laporan'); 
+        $judul_laporan = $this->input->post('judul_laporan');
         
         $where = array('kd_bimbingan' => $kd_bimbingan, 'npm' => $npm);
 
         $data = array(
             'tgl_pengumpulan' => $tanggal_pengumpulan,
             'terlambat' => $terlambat,
-            'cd' => $cd,
-            'laporan' => $laporan,
+            'judul_laporan' => $judul_laporan
         );
 
         $this->m_draftsidang->edit_data($where, $data); 

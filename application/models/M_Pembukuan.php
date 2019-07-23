@@ -9,7 +9,7 @@ class M_Pembukuan extends CI_Model
     $this->db->join('bimbingan', 'bimbingan.npm=mahasiswa.npm', 'inner');
     $this->db->join('sidang', 'bimbingan.kd_bimbingan=sidang.kd_bimbingan', 'inner');
     $this->db->join('draft_sidang', 'draft_sidang.kd_bimbingan=sidang.kd_bimbingan', 'inner');  
-    $this->db->where(array('sidang.status'=>null))->order_by('sidang.kd_bimbingan', "DESC");
+    $this->db->where(array('sidang.status'=>null, 'sidang.nilai !='=>null))->order_by('sidang.kd_bimbingan', "DESC");
     $query = $this->db->get();
     return $query;
   }

@@ -55,7 +55,6 @@
   									<?php } ?>
   								</select>
   							</div>
-
   							<div class="form-group">
   								<label>Terlambat</label>
   								<div class="radio">
@@ -72,14 +71,25 @@
   							</div>
   						</div>
   						<!-- /.col -->
-  						<div class="col-lg-6">
+  						<div class="col-md-6">
   							<div class="form-group">
   								<label>Tanggal Pembukuan</label>
   								<input type="text" class="form-control pull-right" id="datepicker" name="tanggal_pembukuan" required>
   							</div>
+
   							<div class="form-group">
-  								<label>Judul Laporan</label>
-  								<input type="text" class="form-control" placeholder="Enter ..." name="judul_laporan" required>
+  								<label>Kelengkapan</label>
+  								<div class="checkbox">
+  									<label>
+  										<input type="checkbox" name="cd" value="ada">
+  										CD
+  									</label>
+  									&nbsp;&nbsp;
+  									<label>
+  										<input type="checkbox" name="laporan" value="ada">
+  										Laporan
+  									</label>
+  								</div>
   							</div>
   							<!-- /.col -->
   						</div>
@@ -111,7 +121,8 @@
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>Judul Laporan</th>
+  							<th>CD</th>
+  							<th>Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</thead>
@@ -130,7 +141,8 @@
   								<td><?php echo $pbk->tgl_sidang; ?></td>
   								<td><?php echo $pbk->tgl_pembukuan; ?></td>
   								<td><?php echo ucfirst($pbk->terlambat); ?></td>
-  								<td><?php echo ucwords($pbk->judul_laporan); ?></td>
+  								<td><?php echo ($pbk->cd == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
+  								<td><?php echo ($pbk->laporan == 'ada') ?  "Ada" : "Tidak Ada";  ?></td>
   								<td>
   									<a href="<?php echo base_url('pembukuan/update/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
   									<a href="<?php echo base_url('pembukuan/delete_act/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
@@ -149,7 +161,8 @@
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
-  							<th>Judul Laporan</th>
+  							<th>CD</th>
+  							<th>Laporan</th>
   							<th>Aksi</th>
   						</tr>
   					</tfoot>
