@@ -15,8 +15,20 @@
   	<!-- Main content -->
   	<section class="content">
   		<div class="box">
-  			<div class="box-header">
-  				<h3 class="box-title">Data-Data Pendaftaran</h3>
+		  <div class="box-header">
+  				<div class="col-lg-8">
+  					<h3 class="box-title">Data-Data Pendaftaran</h3>
+  				</div>
+  				<div class="col-lg-4">
+  					<form action="<?php echo base_url('pendaftaran/search_tahun'); ?>" method="post">
+  						<div class="col-lg-10">
+  							<input type="text" class="form-control" placeholder="Cari tahun pendaftaran.." name="tahun_pendaftaran" required>
+  						</div>
+  						<div class="col-lg-2">
+  							<input type="submit" class="btn btn-info pull-right  btn-flat" value="Cari">
+  						</div>
+  					</form>
+  				</div>
   			</div>
   			<!-- /.box-header -->
   			<div class="box-body">
@@ -65,7 +77,12 @@
   							<th>Prodi</th>
   							<th>Tanggal Pendaftaran</th>
   							<th>Nama Perusahaan</th>
-  							<th>Alamat Perusahaan</th>
+							  <th>Alamat Perusahaan</th>
+							  <th>DHS</th>
+						  </tr>
+						  <tr>
+  							<th colspan="8"><span style="float:right;">Jumlah Pendaftaran :</span></th>
+  							<th><?php echo $jumlah; ?></th>
   						</tr>
   					</tfoot>
   				</table>

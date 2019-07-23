@@ -31,7 +31,8 @@
   							<th>Pembimbing</th>
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
-  							<th>Terlambat</th>
+							  <th>Terlambat</th>
+							  <th>Judul Laporan</th>
   						</tr>
   					</thead>
   					<tbody>
@@ -48,7 +49,8 @@
   								<td><?php echo $pbk->namaDos; ?></td>
   								<td><?php echo $pbk->tgl_sidang; ?></td>
   								<td><?php echo $pbk->tgl_pembukuan; ?></td>
-  								<td><?php echo ucfirst($pbk->terlambat); ?></td>
+								  <td><?php echo ucfirst($pbk->terlambat); ?></td>
+								  <td><?php echo ucwords($pbk->judul_laporan); ?></td>
   							</tr>
   						<?php } ?>
   					</tbody>
@@ -62,7 +64,8 @@
   							<th>Pembimbing</th>
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
-  							<th>Terlambat</th>
+							  <th>Terlambat</th>
+							  <th>Judul Laporan</th>
   						</tr>
   					</tfoot>
   				</table>

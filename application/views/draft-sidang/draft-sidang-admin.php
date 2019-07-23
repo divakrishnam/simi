@@ -47,7 +47,7 @@
   						<div class="col-md-6">
   							<div class="form-group">
   								<label>Mahasiswa</label>
-  								<select class="form-control select2" style="width: 100%;" name="npm" id="npm">
+  								<select class="form-control select2" style="width: 100%;" name="npm" id="npm" required>
   									<option selected disabled>Pilih Mahasiswa</option>
   									<?php foreach ($mahasiswa as $mhs) { ?>
   										<option value="<?php echo $mhs->npm; ?>"><?php echo $mhs->npm; ?> - <?php echo $mhs->nama; ?></option>
@@ -59,7 +59,7 @@
   									<label>Terlambat</label>
   									<div class="radio">
   										<label>
-  											<input type="radio" name="terlambat" id="optionsRadios1" value="iya">
+  											<input type="radio" name="terlambat" id="optionsRadios1" value="iya" required>
   											Iya
   										</label>
   										&nbsp;&nbsp;
@@ -91,7 +91,7 @@
   						<div class="col-lg-6">
   							<div class="form-group">
   								<label>Tanggal Pengumpulan</label>
-  								<input type="text" class="form-control pull-right" id="datepicker">
+  								<input type="text" class="form-control pull-right" id="datepicker" name="tanggal_pengumpulan" required>
   							</div>
   							<!-- /.col -->
   						</div>

@@ -38,34 +38,28 @@
   		<!-- SELECT2 EXAMPLE -->
   		<div class="box box-default">
   			<div class="box-header with-border">
-  				<h3 class="box-title">Tambah Pembukuan</h3>
+  				<h3 class="box-title">Ubah Pembukuan</h3>
   			</div>
   			<!-- /.box-header -->
-  			<form action="<?php echo base_url('pembukuan/create_act'); ?>" method="post">
+  			<form action="<?php echo base_url('pembukuan/update_act/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" method="post">
   				<div class="box-body">
   					<div class="row">
   						<div class="col-md-6">
   							<div class="form-group">
   								<label>Mahasiswa</label>
-  								<select class="form-control select2" style="width: 100%;" name="kd_sidang" id="npm" required>
-  									<option selected disabled>Pilih Mahasiswa</option>
-  									<?php foreach ($mahasiswa as $mhs) { ?>
-  										<option value="<?php echo $mhs->kd_sidang; ?>"><?php echo $mhs->npm; ?> -
-  											<?php echo $mhs->nama; ?></option>
-  									<?php } ?>
-  								</select>
+  								<input type="text" class="form-control" placeholder="Enter ..." value="<?php echo $pbk->npm . ' - ' . $pbk->namaMhs; ?>" name="kd_sidang" required readonly>
   							</div>
 
   							<div class="form-group">
   								<label>Terlambat</label>
   								<div class="radio">
   									<label>
-  										<input type="radio" name="terlambat" id="optionsRadios1" value="iya" required>
+  										<input type="radio" name="terlambat" id="optionsRadios1" value="iya" required <?php echo ($pbk->terlambat == 'iya') ?  "checked" : "";  ?>>
   										Iya
   									</label>
   									&nbsp;&nbsp;
   									<label>
-  										<input type="radio" name="terlambat" id="optionsRadios2" value="tidak">
+  										<input type="radio" name="terlambat" id="optionsRadios2" value="tidak" <?php echo ($pbk->terlambat == 'tidak') ?  "checked" : "";  ?>>
   										Tidak
   									</label>
   								</div>
@@ -75,11 +69,12 @@
   						<div class="col-lg-6">
   							<div class="form-group">
   								<label>Tanggal Pembukuan</label>
-  								<input type="text" class="form-control pull-right" id="datepicker" name="tanggal_pembukuan" required>
+  								<input type="text" class="form-control pull-right" id="datepicker" name="tanggal_pembukuan" required value="<?php $date = date_create($pbk->tgl_pembukuan);
+																																				echo date_format($date, "m/d/Y"); ?>">
   							</div>
   							<div class="form-group">
   								<label>Judul Laporan</label>
-  								<input type="text" class="form-control" placeholder="Enter ..." name="judul_laporan" required>
+  								<input type="text" class="form-control" placeholder="Enter ..." name="judul_laporan" required value="<?php echo $pbk->judul_laporan; ?>">
   							</div>
   							<!-- /.col -->
   						</div>
@@ -87,7 +82,7 @@
   					</div>
   					<!-- /.box-body -->
   					<div class="box-footer">
-  						<button type="reset" class="btn btn-default pull-right btn-flat ">Cancel</button>
+  						<a href="javascript:window.history.go(-1);" class="btn btn-default pull-right btn-flat">Cancel</a>
   						<input type="submit" class="btn btn-info pull-right  btn-flat" style="margin-right:3px" value="Simpan">
   					</div>
   					<!-- /.box-footer -->
@@ -133,7 +128,7 @@
   								<td><?php echo ucwords($pbk->judul_laporan); ?></td>
   								<td>
   									<a href="<?php echo base_url('pembukuan/update/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
-  									<a href="<?php echo base_url('pembukuan/delete_act/' . $pbk->kd_sidang . '/' . $pbk->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
+  									<a href="#" class="btn btn-danger btn-flat">Hapus</a>
   								</td>
   							</tr>
   						<?php } ?>

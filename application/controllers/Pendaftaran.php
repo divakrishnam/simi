@@ -172,6 +172,7 @@ class Pendaftaran extends CI_Controller
     function laporan()
     {
         $data['pendaftaran'] = $this->m_pendaftaran->show_data_pendaftaran()->result();
+        $data['jumlah'] = $this->m_pendaftaran->show_data_pendaftaran()->num_rows();
         $this->load->view('header');
         $this->load->view('pendaftaran/pendaftaran-laporan', $data);
         $this->load->view('footer');
@@ -187,5 +188,16 @@ class Pendaftaran extends CI_Controller
     }
     function download($url){				
 		force_download('uploads/pendaftaran/'.$url,NULL);
-	}	
+    }	
+    
+    function search_tahun(){
+        $date = date_create($this->input->post('tahun_pendaftaran').'-01-01');
+        $tahun_pendaftaran = date_format($date, "Y");
+        $data['pendaftaran'] = $this->m_pendaftaran->search_pendaftaran($tahun_pendaftaran)->result();
+        $data['jumlah'] = $this->m_pendaftaran->search_pendaftaran($tahun_pendaftaran)->num_rows();
+
+        $this->load->view('header');
+        $this->load->view('pendaftaran/pendaftaran-laporan', $data);
+        $this->load->view('footer');
+    }
 }

@@ -12,7 +12,7 @@ class Sidang extends CI_Controller
 
     function dosen()
     {
-        $where = array('bimbingan.nik' => $this->session->userdata('id'), 'bimbingan.status' => null);
+        $where = array('bimbingan.nik' => $this->session->userdata('id'));
         $data['mahasiswa'] = $this->m_sidang->show_data_mahasiswa_dosen($where)->result();
         $where = array('bimbingan.nik' => $this->session->userdata('id'), 'sidang.status' => null);
         $data['sidang'] = $this->m_sidang->show_data_sidang_dosen($where)->result();
@@ -107,6 +107,9 @@ class Sidang extends CI_Controller
         $waktu_sidang = date_format($time, "H:i:s");
         $ruangan = $this->input->post('ruangan');
 
+        $where = array('draft_sidang.kd_bimbingan' => $kd_bimbingan);
+        $dt = $this->m_sidang->show_data_draftsidang($where)->row();
+
         $data = array(
             'kd_bimbingan' => $kd_bimbingan,
             'nik_penguji' => $nik,
@@ -115,7 +118,13 @@ class Sidang extends CI_Controller
             'ruangan' => $ruangan,
         );
 
-        $this->m_sidang->input_data($data);
+        $where = array(
+            'status' => null,
+            'kd_bimbingan'=> $kd_bimbingan, 
+            'npm'=>$dt->npm
+        );
+
+        $this->m_sidang->input_data($data, $where);
 
         redirect(base_url('sidang/koordinator'));
     }
@@ -156,7 +165,7 @@ class Sidang extends CI_Controller
 
     function delete_act($kd_sidang, $kd_bimbingan, $npm)
     {
-        $where = array('kd_sidang' => $kd_sidang, 'sidang.kd_bimbingan' => $kd_bimbingan, 'bimbingan.npm' => $npm, 'sidang.status' => null);
+        $where = array('kd_sidang' => $kd_sidang, 'kd_bimbingan' => $kd_bimbingan, 'status' => null);
         $this->m_sidang->delete_data($where);
         $this->session->set_flashdata('message', 'hapus');
         redirect(base_url('sidang/koordinator'));

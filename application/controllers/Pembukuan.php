@@ -17,31 +17,68 @@ class Pembukuan extends CI_Controller{
     }
 
     function create_act(){
-        $npm = $this->input->post('npm');
+        $kd_sidang = $this->input->post('kd_sidang');
         $date = date_create($this->input->post('tanggal_pembukuan'));
         $tanggal_pembukuan = date_format($date,"Y-m-d");
         $terlambat = $this->input->post('terlambat');
+        $judul_laporan = $this->input->post('judul_laporan');
         
-        $where = array('draft_sidang.npm' => $npm);
+        $where = array('sidang.kd_sidang' => $kd_sidang);
         $dt = $this->m_pembukuan->show_data_sidang($where)->row();
 
         $data = array(
-            'kd_sidang' => $dt->kd_sidang,
-            'npm' => $npm,
+            'kd_sidang' => $kd_sidang,
+            'npm' => $dt->npm,
             'tgl_pembukuan' => $tanggal_pembukuan,
             'terlambat' => $terlambat,
+            'judul_laporan' => $judul_laporan
         );
 
         $where = array('kd_sidang' => $dt->kd_sidang);
         $get = $this->m_pembukuan->show_data_all($where)->row();
 
-        $bimbingan = array('kd_bimbingan'=> $get->kd_bimbingan,'kd_pendaftaran'=> $get->kd_pendaftaran,'npm' => $npm, 'status' => null);
-        $pendaftaran = array('kd_pendaftaran'=> $get->kd_pendaftaran,'npm' => $npm, 'status' => null);
-        $draftsidang = array('kd_bimbingan'=> $get->kd_bimbingan,'npm' => $npm, 'status' => null);
         $sidang = array('kd_sidang'=> $get->kd_sidang,'kd_bimbingan'=>$get->kd_bimbingan, 'status' => null );
 
-        $this->m_pembukuan->input_data($data,$bimbingan, $pendaftaran, $draftsidang, $sidang); 
+        $this->m_pembukuan->input_data($data, $sidang); 
         $this->session->set_flashdata('message','simpan');
+        redirect(base_url('pembukuan'));
+    }
+
+    function update($kd_sidang, $npm){
+        $where = array('pembukuan.kd_sidang' => $kd_sidang, 'pembukuan.npm' => $npm);
+        $data['pbk'] = $this->m_pembukuan->show_data_pembukuan_mahasiswa($where)->row();
+        $data['pembukuan'] = $this->m_pembukuan->show_data_pembukuan()->result();
+        $this->load->view('header');
+        $this->load->view('pembukuan/pembukuan-admin-ubah', $data);
+        $this->load->view('footer');
+    }
+
+    function update_act($kd_sidang, $npm){
+        $date = date_create($this->input->post('tanggal_pembukuan'));
+        $tanggal_pembukuan = date_format($date,"Y-m-d");
+        $terlambat = $this->input->post('terlambat');
+        $judul_laporan = $this->input->post('judul_laporan');
+        
+        $where = array('pembukuan.kd_sidang' => $kd_sidang, 'pembukuan.npm' => $npm);
+
+        $data = array(
+            'tgl_pembukuan' => $tanggal_pembukuan,
+            'terlambat' => $terlambat,
+            'judul_laporan' => $judul_laporan
+        );
+
+        $this->m_pembukuan->update_data($where, $data); 
+        $this->session->set_flashdata('message','ubah');
+        redirect(base_url('pembukuan'));
+    }
+
+    function delete_act($kd_sidang, $npm){
+        $where = array('pembukuan.kd_sidang' => $kd_sidang, 'pembukuan.npm' => $npm);
+        $cek = $this->m_pembukuan->show_data_pembukuans($where)->row();
+        $sidang = array('sidang.kd_sidang' => $kd_sidang, 'sidang.kd_bimbingan' => $cek->kd_bimbingan);
+
+        $this->m_pembukuan->delete_data($where, $sidang);
+        $this->session->set_flashdata('message','hapus');
         redirect(base_url('pembukuan'));
     }
 
@@ -56,6 +93,14 @@ class Pembukuan extends CI_Controller{
         $data['pembukuan'] = $this->m_pembukuan->show_data_pembukuan_mahasiswa($where)->result();
         $this->load->view('header');
         $this->load->view('pembukuan/pembukuan-laporan-mahasiswa',$data);
+        $this->load->view('footer');
+    }
+
+    function search_laporan(){
+        $judul_laporan = $this->input->post('judul_laporan');
+        $data['pembukuan'] = $this->m_pembukuan->search_laporan($judul_laporan)->result();
+        $this->load->view('header');
+        $this->load->view('pembukuan/pembukuan-laporan',$data);
         $this->load->view('footer');
     }
 }

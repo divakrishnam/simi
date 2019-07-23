@@ -27,22 +27,28 @@ class Bimbingan extends CI_Controller
         $nik = $this->input->post('nik');
 
         $where = array('npm' => $npm, 'status'=> null);
-        $data = $this->m_bimbingan->show_data_pendaftaran($where)->row();
+        $dt = $this->m_bimbingan->show_data_pendaftaran($where)->row();
 
         $data = array(
             'npm' => $npm,
             'nik' => $nik,
-            'kd_pendaftaran' => $data->kd_pendaftaran
+            'kd_pendaftaran' => $dt->kd_pendaftaran
         );
 
-        $this->m_bimbingan->input_data_koordinator($data);
+        $where = array(
+            'status' => null,
+            'kd_pendaftaran'=> $dt->kd_pendaftaran, 
+            'npm'=>$npm
+        );
+
+        $this->m_bimbingan->input_data_koordinator($data, $where);
         $this->session->set_flashdata('message', 'simpan');
         redirect(base_url('bimbingan/koordinator'));
     }
 
     function update_bimbingan($kd_bimbingan, $npm)
     {
-        $where = array('kd_bimbingan' => $kd_bimbingan, 'bimbingan.npm' => $npm, 'status' => null);
+        $where = array('kd_bimbingan' => $kd_bimbingan, 'bimbingan.npm' => $npm);
         $data['bimb'] = $this->m_bimbingan->show_data_bimbingan_koordinator_update($where)->row();
         $data['bimbingan'] = $this->m_bimbingan->show_data_bimbingan_koordinator()->result();
         $data['dosen'] = $this->m_bimbingan->show_data_dosen()->result();
@@ -194,6 +200,14 @@ class Bimbingan extends CI_Controller
         $data['bimbingan'] = $this->m_bimbingan->show_data_bimbingan_mahasiswa($where)->result();
         $this->load->view('header');
         $this->load->view('bimbingan/bimbingan-laporan-mahasiswa', $data);
+        $this->load->view('footer');
+    }
+
+    function search_bimbingan(){
+        $bimbingan = $this->input->post('bimbingan');
+        $data['bimbingan'] = $this->m_bimbingan->search_bimbingan($bimbingan)->result();
+        $this->load->view('header');
+        $this->load->view('bimbingan/bimbingan-laporan', $data);
         $this->load->view('footer');
     }
 }

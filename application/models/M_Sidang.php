@@ -11,13 +11,17 @@ class M_Sidang extends CI_Model
     $this->db->select('*');
     $this->db->from('mahasiswa');
     $this->db->join('bimbingan', 'mahasiswa.npm=bimbingan.npm', 'inner');
-    $this->db->where(array('bimbingan.status'=>null));
+    $this->db->join('draft_sidang', 'draft_sidang.kd_bimbingan=bimbingan.kd_bimbingan', 'inner'); 
+    $this->db->where(array('draft_sidang.status' => null))->order_by('draft_sidang.kd_bimbingan', "DESC"); 
     $query = $this->db->get();
     return $query;
   }
 
-  function input_data($data)
+  function input_data($data, $where)
   {
+    $this->db->where($where);
+    $this->db->update('draft_sidang',array('status'=>'Approve'));
+
     $this->db->insert('sidang', $data);
   }
 
@@ -28,6 +32,16 @@ class M_Sidang extends CI_Model
     $this->db->join('bimbingan', 'sidang.kd_bimbingan =bimbingan.kd_bimbingan ', 'inner');
     $this->db->join('mahasiswa', 'mahasiswa.npm=bimbingan.npm', 'inner');
     $this->db->join('dosen', 'sidang.nik_penguji =dosen.nik', 'inner');
+    $query = $this->db->get();
+    return $query;
+  }
+
+  function show_data_draftsidang($where)
+  {
+    $this->db->select('*');
+    $this->db->from('draft_sidang');
+    $this->db->join('bimbingan', 'draft_sidang.kd_bimbingan =bimbingan.kd_bimbingan ', 'inner');
+    $this->db->where($where)->limit(1)->order_by('draft_sidang.kd_bimbingan', "DESC");
     $query = $this->db->get();
     return $query;
   }

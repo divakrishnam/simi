@@ -16,7 +16,19 @@
   	<section class="content">
   		<div class="box">
   			<div class="box-header">
-  				<h3 class="box-title">Data-Data Pembukuan</h3>
+  				<div class="col-lg-8">
+  					<h3 class="box-title">Data-Data Pembukuan</h3>
+  				</div>
+  				<div class="col-lg-4">
+  					<form action="<?php echo base_url('pembukuan/search_laporan'); ?>" method="post">
+  						<div class="col-lg-10">
+  							<input type="text" class="form-control" placeholder="Cari judul laporan.." name="judul_laporan" required>
+  						</div>
+  						<div class="col-lg-2">
+  							<input type="submit" class="btn btn-info pull-right  btn-flat" value="Cari">
+  						</div>
+  					</form>
+  				</div>
   			</div>
   			<!-- /.box-header -->
   			<div class="box-body">
@@ -32,6 +44,7 @@
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
+  							<th>Judul Laporan</th>
   						</tr>
   					</thead>
   					<tbody>
@@ -49,6 +62,7 @@
   								<td><?php echo $pbk->tgl_sidang; ?></td>
   								<td><?php echo $pbk->tgl_pembukuan; ?></td>
   								<td><?php echo ucfirst($pbk->terlambat); ?></td>
+  								<td><?php echo ucwords($pbk->judul_laporan); ?></td>
   							</tr>
   						<?php } ?>
   					</tbody>
@@ -63,6 +77,7 @@
   							<th>Tanggal Sidang</th>
   							<th>Tanggal Pengumpulan</th>
   							<th>Terlambat</th>
+  							<th>Judul Laporan</th>
   						</tr>
   					</tfoot>
   				</table>

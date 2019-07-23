@@ -21,14 +21,17 @@ class M_Bimbingan extends CI_Model
     $this->db->select('*');
     $this->db->from('mahasiswa');
     $this->db->join('pendaftaran', 'mahasiswa.npm=pendaftaran.npm', 'inner');
-    $this->db->where(array('status' => null));
+    $this->db->where(array('status' => null, ));
     $query = $this->db->get();
     return $query;
   }
 
-  function input_data_koordinator($data)
+  function input_data_koordinator($data, $where)
   {
-    $this->db->insert('bimbingan', $data);
+    $this->db->where($where);
+    $this->db->update('pendaftaran',array('status'=>'Approve'));
+
+    $this->db->insert('bimbingan', $data);    
   }
 
   function show_data_pendaftaran($where)
@@ -124,5 +127,15 @@ class M_Bimbingan extends CI_Model
   function input_data_bimbingan_mahasiswa($data)
   {
     $this->db->insert('detail_bimbingan', $data);
+  }
+
+  function search_bimbingan($keyword){
+    $this->db->select('*, dosen.nama as namaDos, mahasiswa.nama as namaMhs');
+    $this->db->from('bimbingan');
+    $this->db->join('mahasiswa', 'mahasiswa.npm=bimbingan.npm', 'inner');
+    $this->db->join('dosen', 'dosen.nik=bimbingan.nik', 'inner');
+    $this->db->join('detail_bimbingan', 'detail_bimbingan.kd_bimbingan=bimbingan.kd_bimbingan', 'inner');
+    $this->db->like('dosen.nama',$keyword);
+    return $this->db->get();
   }
 }

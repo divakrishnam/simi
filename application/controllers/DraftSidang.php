@@ -25,10 +25,10 @@ class DraftSidang extends CI_Controller{
         $laporan = $this->input->post('laporan'); 
         
         $where = array('npm' => $npm);
-        $data = $this->m_draftsidang->show_data_bimbingan($where)->row();
+        $dt = $this->m_draftsidang->show_data_bimbingan($where)->row();
 
         $data = array(
-            'kd_bimbingan' => $data->kd_bimbingan,
+            'kd_bimbingan' => $dt->kd_bimbingan,
             'npm' => $npm,
             'tgl_pengumpulan' => $tanggal_pengumpulan,
             'terlambat' => $terlambat,
@@ -36,13 +36,19 @@ class DraftSidang extends CI_Controller{
             'laporan' => $laporan,
         );
 
-        $this->m_draftsidang->input_data($data); 
+        $where = array(
+            'status' => null,
+            'kd_bimbingan'=> $dt->kd_bimbingan, 
+            'npm'=>$npm
+        );
+
+        $this->m_draftsidang->input_data($data, $where); 
         $this->session->set_flashdata('message','simpan');
         redirect(base_url('draftsidang'));
     }
 
     function update($kd_bimbingan, $npm){
-        $where = array('bimbingan.kd_bimbingan' => $kd_bimbingan, 'bimbingan.npm' => $npm, 'bimbingan.status' => null);
+        $where = array('bimbingan.kd_bimbingan' => $kd_bimbingan, 'bimbingan.npm' => $npm);
         $data['drfs'] = $this->m_draftsidang->edit_data_draftsidang($where)->row();
         $data['draftsidang'] = $this->m_draftsidang->show_data_draftsidang(array('draft_sidang.status'=>null))->result();
         $this->load->view('header');
@@ -68,6 +74,13 @@ class DraftSidang extends CI_Controller{
 
         $this->m_draftsidang->edit_data($where, $data); 
         $this->session->set_flashdata('message','ubah');
+        redirect(base_url('draftsidang'));
+    }
+
+    function delete_act($kd_bimbingan, $npm){
+        $where = array('kd_bimbingan' => $kd_bimbingan, 'npm' => $npm);
+        $this->m_draftsidang->delete_data($where);
+        $this->session->set_flashdata('message','hapus');
         redirect(base_url('draftsidang'));
     }
 

@@ -6,14 +6,17 @@ class M_DraftSidang extends CI_Model
     $this->db->select('*');
     $this->db->from('mahasiswa');
     $this->db->join('pendaftaran', 'pendaftaran.npm=mahasiswa.npm', 'inner');
-    $this->db->join('bimbingan', 'bimbingan.npm=mahasiswa.npm', 'inner');
-    $this->db->where(array('bimbingan.status' => null));
+    $this->db->join('bimbingan', 'bimbingan.kd_pendaftaran=pendaftaran.kd_pendaftaran', 'inner');
+    $this->db->where(array('bimbingan.status' => null))->order_by('pendaftaran.kd_pendaftaran', "DESC");
     $query = $this->db->get();
     return $query;
   }
 
-  function input_data($data)
+  function input_data($data, $where)
   {
+    $this->db->where($where);
+    $this->db->update('bimbingan',array('status'=>'Approve'));
+
     $this->db->insert('draft_sidang', $data);
   }
 
@@ -81,4 +84,12 @@ class M_DraftSidang extends CI_Model
     $query = $this->db->get();
     return $query;
   }
+
+  function delete_data($where){
+    $this->db->where($where);
+    $this->db->update('bimbingan',array('status'=>null));
+
+		$this->db->where($where);
+		$this->db->delete('draft_sidang');
+	}
 }

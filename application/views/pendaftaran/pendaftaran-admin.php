@@ -47,7 +47,7 @@
   						<div class="col-md-6">
   							<div class="form-group">
   								<label>Mahasiswa</label>
-  								<select class="form-control select2" style="width: 100%;" onchange="getNama()" name="npm" id="npm">
+								  <select class="form-control select2" style="width: 100%;" name="npm" id="npm">
   									<option selected disabled>Pilih Mahasiswa</option>
   									<?php foreach ($mahasiswa as $mhs) { ?>
   										<option value="<?php echo $mhs->npm; ?>"><?php echo $mhs->npm; ?> - <?php echo $mhs->nama; ?></option>

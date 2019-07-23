@@ -38,7 +38,7 @@
           <!-- SELECT2 EXAMPLE -->
           <div class="box box-default">
               <div class="box-header with-border">
-                  <h3 class="box-title">Tambah Bimbingan</h3>
+                  <h3 class="box-title">Ubah Bimbingan</h3>
               </div>
               <!-- /.box-header -->
               <form action="<?php echo base_url('bimbingan/update_act_bimbingan/' . $bimb->kd_bimbingan . '/' . $bimb->npm); ?>" method="post">

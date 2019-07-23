@@ -37,5 +37,13 @@ class M_Pendaftaran extends CI_Model
   function delete_data($where){
 		$this->db->where($where);
 		$this->db->delete('pendaftaran');
-	}
+  }
+  
+  function search_pendaftaran($keyword){
+    $this->db->select('*');
+    $this->db->from('pendaftaran');
+    $this->db->join('mahasiswa', 'pendaftaran.npm=mahasiswa.npm', 'inner');
+    $this->db->where(array('year(tgl_pendaftaran)'=>$keyword));
+    return $this->db->get();
+  }
 }
