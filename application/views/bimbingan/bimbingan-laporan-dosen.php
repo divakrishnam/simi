@@ -29,8 +29,8 @@
   							<th>Kelas</th>
   							<th>Prodi</th>
   							<th>Tanggal Bimbingan</th>
-							  <th>Topik Bimbingan</th>
-							  <th>Status Bimbingan</th>
+  							<th>Topik Bimbingan</th>
+  							<th>Status Bimbingan</th>
   						</tr>
   					</thead>
   					<tbody>
@@ -39,14 +39,14 @@
 							foreach ($bimbingan as $bim) {
 								?>
   							<tr>
-							  <td><?php echo $no++ ?></td>
+  								<td><?php echo $no++ ?></td>
   								<td><?php echo $bim->npm; ?></td>
   								<td><?php echo $bim->nama; ?></td>
   								<td><?php echo $bim->kelas; ?></td>
   								<td><?php echo $bim->prodi; ?></td>
   								<td><?php echo $bim->tanggal_bimbingan; ?></td>
-								  <td><?php echo $bim->topik_bimbingan; ?></td>
-								  <td><?php if ($bim->status_bimbingan == null) {
+  								<td><?php echo $bim->topik_bimbingan; ?></td>
+  								<td><?php if ($bim->status_bimbingan == null) {
 											echo 'Disapprove';
 										} else {
 											echo 'Approve';
@@ -64,8 +64,66 @@
   							<th>Kelas</th>
   							<th>Prodi</th>
   							<th>Tanggal Bimbingan</th>
-							  <th>Topik Bimbingan</th>
-							  <th>Status Bimbingan</th>
+  							<th>Topik Bimbingan</th>
+  							<th>Status Bimbingan</th>
+  						</tr>
+  					</tfoot>
+  				</table>
+  			</div>
+  			<!-- /.box-body -->
+  		</div>
+  		<div class="box">
+  			<div class="box-header">
+  				<h3 class="box-title">Data-Data Bimbingan</h3>
+  			</div>
+  			<!-- /.box-header -->
+  			<div class="box-body">
+  				<table id="example1" class="table table-bordered table-striped">
+  					<thead>
+  						<tr>
+  							<th>No.</th>
+  							<th>NPM</th>
+  							<th>Nama</th>
+  							<th>Kelas</th>
+  							<th>Prodi</th>
+  							<th>Pembimbing</th>
+  							<th>Jumlah Bimbingan</th>
+  							<th>Rekomendasi</th>
+  						</tr>
+  					</thead>
+  					<tbody>
+  						<?php
+							$no = 1;
+							foreach ($rekomendasi as $rkm) {
+								?>
+  							<tr>
+  								<td><?php echo $no++ ?></td>
+  								<td><?php echo $rkm->npm; ?></td>
+  								<td><?php echo $rkm->namaMhs; ?></td>
+  								<td><?php echo $rkm->kelas; ?></td>
+  								<td><?php echo $rkm->prodi; ?></td>
+  								<td><?php echo $rkm->namaDos; ?></td>
+  								<td><?php echo $rkm->jumlah_bimbingan; ?></td>
+  								<form action="<?php echo base_url('bimbingan/update_act_rekomendasi_dosen/' . $rkm->kd_bimbingan . '/' . $rkm->npm); ?>" method="post">
+  									<td><input type="submit" <?php if ($rkm->rekomendasi == null) {
+																	echo 'class="btn btn-warning" value="Belum Rekomendasi"';
+																} else {
+																	echo 'class="btn btn-success" value="Rekomendasi"';
+																}; ?> name="rekomendasi"></td>
+  								</form>
+  							</tr>
+  						<?php } ?>
+  					</tbody>
+  					<tfoot>
+  						<tr>
+  							<th>No.</th>
+  							<th>NPM</th>
+  							<th>Nama</th>
+  							<th>Kelas</th>
+  							<th>Prodi</th>
+  							<th>Tanggal Bimbingan</th>
+  							<th>Topik Bimbingan</th>
+  							<th>Status</th>
   						</tr>
   					</tfoot>
   				</table>

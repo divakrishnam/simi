@@ -26,7 +26,7 @@ class Bimbingan extends CI_Controller
         $npm = $this->input->post('npm');
         $nik = $this->input->post('nik');
 
-        $where = array('npm' => $npm, 'status'=> null);
+        $where = array('npm' => $npm, 'status' => null);
         $dt = $this->m_bimbingan->show_data_pendaftaran($where)->row();
 
         $data = array(
@@ -37,8 +37,8 @@ class Bimbingan extends CI_Controller
 
         $where = array(
             'status' => null,
-            'kd_pendaftaran'=> $dt->kd_pendaftaran, 
-            'npm'=>$npm
+            'kd_pendaftaran' => $dt->kd_pendaftaran,
+            'npm' => $npm
         );
 
         $this->m_bimbingan->input_data_koordinator($data, $where);
@@ -103,6 +103,40 @@ class Bimbingan extends CI_Controller
 
         $this->m_bimbingan->edit_data_dosen($where, $data);
         redirect(base_url('bimbingan/dosen'));
+    }
+
+    function update_act_rekomendasi($kd_bimbingan, $npm)
+    {
+        $where = array('bimbingan.npm' => $npm, 'bimbingan.kd_bimbingan' => $kd_bimbingan);
+        if ($this->input->post('rekomendasi') == 'Rekomendasi') {
+            $data = array(
+                'rekomendasi' => null,
+            );
+        } else {
+            $data = array(
+                'rekomendasi' => 'Rekomendasi',
+            );
+        }
+
+        $this->m_bimbingan->edit_data_rekomendasi($where, $data);
+        redirect(base_url('bimbingan/laporan'));
+    }
+
+    function update_act_rekomendasi_dosen($kd_bimbingan, $npm)
+    {
+        $where = array('bimbingan.npm' => $npm, 'bimbingan.kd_bimbingan' => $kd_bimbingan);
+        if ($this->input->post('rekomendasi') == 'Rekomendasi') {
+            $data = array(
+                'rekomendasi' => null,
+            );
+        } else {
+            $data = array(
+                'rekomendasi' => 'Rekomendasi',
+            );
+        }
+
+        $this->m_bimbingan->edit_data_rekomendasi($where, $data);
+        redirect(base_url('bimbingan/laporan_dosen'));
     }
 
     function mahasiswa()
@@ -179,7 +213,9 @@ class Bimbingan extends CI_Controller
 
     function laporan()
     {
+        $where = array('status' => null);
         $data['bimbingan'] = $this->m_bimbingan->show_data_bimbingan()->result();
+        $data['rekomendasi'] = $this->m_bimbingan->show_data_rekomendasi($where)->result();
         $this->load->view('header');
         $this->load->view('bimbingan/bimbingan-laporan', $data);
         $this->load->view('footer');
@@ -187,8 +223,9 @@ class Bimbingan extends CI_Controller
 
     function laporan_dosen()
     {
-        $where = array('nik' => $this->session->userdata('id'), 'status' => null);
-        $data['bimbingan'] = $this->m_bimbingan->show_data_bimbingan_dosen($where)->result();
+        $where = array('bimbingan.nik' => $this->session->userdata('id'), 'status' => null);
+        $data['bimbingan'] = $this->m_bimbingan->show_data_bimbingan()->result();
+        $data['rekomendasi'] = $this->m_bimbingan->show_data_rekomendasi($where)->result();
         $this->load->view('header');
         $this->load->view('bimbingan/bimbingan-laporan-dosen', $data);
         $this->load->view('footer');
@@ -203,7 +240,8 @@ class Bimbingan extends CI_Controller
         $this->load->view('footer');
     }
 
-    function search_bimbingan(){
+    function search_bimbingan()
+    {
         $bimbingan = $this->input->post('bimbingan');
         $data['bimbingan'] = $this->m_bimbingan->search_bimbingan($bimbingan)->result();
         $this->load->view('header');

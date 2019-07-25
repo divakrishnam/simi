@@ -81,6 +81,7 @@
   					<!-- /.box-footer -->
   			</form>
   		</div>
+
   		<div class="box">
   			<div class="box-header">
   				<h3 class="box-title">Data-Data Mahasiswa</h3>
@@ -133,6 +134,7 @@
   			</div>
   			<!-- /.box-body -->
   		</div>
+
   	</section>
   	<!-- /.content -->
   </div>

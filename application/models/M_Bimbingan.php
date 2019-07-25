@@ -113,6 +113,12 @@ class M_Bimbingan extends CI_Model
     $this->db->update('detail_bimbingan', $data);
   }
 
+  function edit_data_rekomendasi($where, $data)
+  {
+    $this->db->where($where);
+    $this->db->update('bimbingan', $data);
+  }
+
   function show_data_bimbingan_mahasiswa($where)
   {
     $this->db->select('*, dosen.nama as namaDos');
@@ -136,6 +142,18 @@ class M_Bimbingan extends CI_Model
     $this->db->join('dosen', 'dosen.nik=bimbingan.nik', 'inner');
     $this->db->join('detail_bimbingan', 'detail_bimbingan.kd_bimbingan=bimbingan.kd_bimbingan', 'inner');
     $this->db->like('dosen.nama',$keyword);
+    return $this->db->get();
+  }
+
+  function show_data_rekomendasi($where)
+  {
+    $this->db->distinct('bimbingan.kd_bimbingan');
+    $this->db->select('*, dosen.nama as namaDos, mahasiswa.nama as namaMhs, count(*) as jumlah_bimbingan');
+    $this->db->from('bimbingan');
+    $this->db->join('detail_bimbingan', 'detail_bimbingan.kd_bimbingan=bimbingan.kd_bimbingan', 'inner');
+    $this->db->join('dosen', 'dosen.nik=bimbingan.nik', 'inner');
+    $this->db->join('mahasiswa', 'mahasiswa.npm=bimbingan.npm', 'inner');
+    $this->db->where($where)->group_by('bimbingan.kd_bimbingan', "DESC");
     return $this->db->get();
   }
 }

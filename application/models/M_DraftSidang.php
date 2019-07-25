@@ -7,7 +7,7 @@ class M_DraftSidang extends CI_Model
     $this->db->from('mahasiswa');
     $this->db->join('pendaftaran', 'pendaftaran.npm=mahasiswa.npm', 'inner');
     $this->db->join('bimbingan', 'bimbingan.kd_pendaftaran=pendaftaran.kd_pendaftaran', 'inner');
-    $this->db->where(array('bimbingan.status' => null))->order_by('pendaftaran.kd_pendaftaran', "DESC");
+    $this->db->where(array('bimbingan.status' => null, 'bimbingan.rekomendasi' => 'Rekomendasi'))->order_by('pendaftaran.kd_pendaftaran', "DESC");
     $query = $this->db->get();
     return $query;
   }
