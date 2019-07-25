@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 23, 2019 at 04:33 PM
+-- Generation Time: Jul 25, 2019 at 05:28 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 5.6.35
 
@@ -33,6 +33,7 @@ CREATE TABLE `bimbingan` (
   `kd_pendaftaran` int(11) NOT NULL,
   `npm` int(11) NOT NULL,
   `nik` int(11) NOT NULL,
+  `rekomendasi` varchar(25) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -40,9 +41,9 @@ CREATE TABLE `bimbingan` (
 -- Dumping data for table `bimbingan`
 --
 
-INSERT INTO `bimbingan` (`kd_bimbingan`, `kd_pendaftaran`, `npm`, `nik`, `status`) VALUES
-(15, 18, 2173010, 10983133, 'Approve'),
-(16, 21, 2173010, 55666554, 'Approve');
+INSERT INTO `bimbingan` (`kd_bimbingan`, `kd_pendaftaran`, `npm`, `nik`, `rekomendasi`, `status`) VALUES
+(15, 18, 2173010, 10983133, 'Rekomendasi', NULL),
+(16, 21, 2173010, 55666554, 'Rekomendasi', NULL);
 
 -- --------------------------------------------------------
 
@@ -180,6 +181,7 @@ CREATE TABLE `pendaftaran` (
   `nama_perusahaan` varchar(35) NOT NULL,
   `alamat_perusahaan` text NOT NULL,
   `upload_dhs` text NOT NULL,
+  `diterima` varchar(25) DEFAULT NULL,
   `status` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -187,12 +189,12 @@ CREATE TABLE `pendaftaran` (
 -- Dumping data for table `pendaftaran`
 --
 
-INSERT INTO `pendaftaran` (`kd_pendaftaran`, `npm`, `tgl_pendaftaran`, `nama_perusahaan`, `alamat_perusahaan`, `upload_dhs`, `status`) VALUES
-(18, 2173010, '2019-07-31', 'PT. INDO', 'ASD', '2173010.png', 'Approve'),
-(19, 2173009, '2019-07-31', 'PT. WWE', 'BANDUNG', '2173009.png', NULL),
-(20, 2173001, '2019-07-31', 'PT. INDO', 'BANDUNG', '2173001.png', NULL),
-(21, 2173010, '2019-08-10', 'PT. ASD', 'BANDUNG', '2173010.png', 'Approve'),
-(22, 2173003, '2020-02-08', 'PT. INDO', 'SURABAYA', '2173003.png', NULL);
+INSERT INTO `pendaftaran` (`kd_pendaftaran`, `npm`, `tgl_pendaftaran`, `nama_perusahaan`, `alamat_perusahaan`, `upload_dhs`, `diterima`, `status`) VALUES
+(18, 2173010, '2019-07-31', 'PT. INDO', 'ASD', '2173010.png', 'Diterima', 'Approve'),
+(19, 2173009, '2019-07-31', 'PT. WWE', 'BANDUNG', '2173009.png', '', NULL),
+(20, 2173001, '2019-07-31', 'PT. INDO', 'BANDUNG', '2173001.png', 'Diterima', NULL),
+(21, 2173010, '2019-08-10', 'PT. ASD', 'BANDUNG', '2173010.png', '', 'Approve'),
+(22, 2173003, '2020-02-08', 'PT. INDO', 'SURABAYA', '2173003.png', '', NULL);
 
 -- --------------------------------------------------------
 
