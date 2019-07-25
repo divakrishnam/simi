@@ -46,4 +46,8 @@ class M_Pendaftaran extends CI_Model
     $this->db->where(array('year(tgl_pendaftaran)'=>$keyword));
     return $this->db->get();
   }
+  function edit_data_diterima($where,$data){
+		$this->db->where($where);
+		$this->db->update('pendaftaran',$data);
+  }
 }

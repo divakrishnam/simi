@@ -200,4 +200,21 @@ class Pendaftaran extends CI_Controller
         $this->load->view('pendaftaran/pendaftaran-laporan', $data);
         $this->load->view('footer');
     }
+
+    function update_act_diterima($kd_pendaftaran, $npm)
+    {
+        $where = array('pendaftaran.npm' => $npm, 'pendaftaran.kd_pendaftaran' => $kd_pendaftaran);
+        if ($this->input->post('diterima') == 'Diterima') {
+            $data = array(
+                'diterima' => null,
+            );
+        } else {
+            $data = array(
+                'diterima' => 'Diterima',
+            );
+        }
+
+        $this->m_pendaftaran->edit_data_diterima($where, $data);
+        redirect(base_url('pendaftaran/laporan'));
+    }
 }

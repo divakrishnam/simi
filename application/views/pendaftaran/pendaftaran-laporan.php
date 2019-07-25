@@ -15,7 +15,7 @@
   	<!-- Main content -->
   	<section class="content">
   		<div class="box">
-		  <div class="box-header">
+  			<div class="box-header">
   				<div class="col-lg-8">
   					<h3 class="box-title">Data-Data Pendaftaran</h3>
   				</div>
@@ -43,6 +43,7 @@
   							<th>Tanggal Pendaftaran</th>
   							<th>Nama Perusahaan</th>
   							<th>Alamat Perusahaan</th>
+  							<th>Status</th>
   							<th>DHS</th>
   						</tr>
   					</thead>
@@ -60,6 +61,15 @@
   								<td><?php echo date_format(date_create($pdft->tgl_pendaftaran), "d-m-Y"); ?></td>
   								<td><?php echo $pdft->nama_perusahaan; ?></td>
   								<td><?php echo $pdft->alamat_perusahaan; ?></td>
+  								<form action="<?php echo base_url('pendaftaran/update_act_diterima/' . $pdft->kd_pendaftaran . '/' . $pdft->npm); ?>" method="post">
+  									<td>
+  										<input type="submit" <?php if ($pdft->diterima == null) {
+																	echo 'class="btn btn-warning" value="Belum Diterima"';
+																} else {
+																	echo 'class="btn btn-success" value="Diterima"';
+																}; ?> name="diterima">
+  									</td>
+  								</form>
   								<td>
   									<a href="<?php echo base_url('/uploads/pendaftaran/' . $pdft->upload_dhs); ?>" target='_blank' class="btn btn-info  btn-flat">View</a>
   									<a href="<?php echo base_url('/pendaftaran/download/' . $pdft->upload_dhs); ?>" class="btn btn-primary  btn-flat">Download</a>
@@ -77,10 +87,10 @@
   							<th>Prodi</th>
   							<th>Tanggal Pendaftaran</th>
   							<th>Nama Perusahaan</th>
-							  <th>Alamat Perusahaan</th>
-							  <th>DHS</th>
-						  </tr>
-						  <tr>
+  							<th>Alamat Perusahaan</th>
+  							<th>DHS</th>
+  						</tr>
+  						<tr>
   							<th colspan="8"><span style="float:right;">Jumlah Pendaftaran :</span></th>
   							<th><?php echo $jumlah; ?></th>
   						</tr>
