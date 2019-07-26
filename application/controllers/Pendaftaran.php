@@ -215,6 +215,6 @@ class Pendaftaran extends CI_Controller
         }
 
         $this->m_pendaftaran->edit_data_diterima($where, $data);
-        redirect(base_url('pendaftaran/laporan'));
+        redirect(base_url('pendaftaran/mahasiswa'));
     }
 }

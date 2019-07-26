@@ -105,6 +105,7 @@
   							<th>Tanggal Pendaftaran</th>
   							<th>Nama Perusahaan</th>
   							<th>Alamat Perusahaan</th>
+  							<th>Status</th>
   							<th>Aksi</th>
   						</tr>
   					</thead>
@@ -122,6 +123,15 @@
   								<td><?php echo date_format(date_create($pdft->tgl_pendaftaran), "d-m-Y"); ?></td>
   								<td><?php echo ucwords($pdft->nama_perusahaan); ?></td>
   								<td><?php echo ucwords($pdft->alamat_perusahaan); ?></td>
+  								<form action="<?php echo base_url('pendaftaran/update_act_diterima/' . $pdft->kd_pendaftaran . '/' . $pdft->npm); ?>" method="post">
+  									<td>
+  										<input type="submit" <?php if ($pdft->diterima == null) {
+																	echo 'class="btn btn-warning" value="Belum Diterima"';
+																} else {
+																	echo 'class="btn btn-success" value="Diterima"';
+																}; ?> name="diterima">
+  									</td>
+  								</form>
   								<td>
   									<a href="<?php echo base_url('pendaftaran/update/' . $pdft->kd_pendaftaran . '/' . $pdft->npm); ?>" class="btn btn-warning  btn-flat">Ubah</a>
   									<a href="<?php echo base_url('pendaftaran/delete_act/' . $pdft->kd_pendaftaran . '/' . $pdft->npm); ?>" class="btn btn-danger btn-flat">Hapus</a>
@@ -139,6 +149,7 @@
   							<th>Tanggal Pendaftaran</th>
   							<th>Nama Perusahaan</th>
   							<th>Alamat Perusahaan</th>
+  							<th>Status</th>
   							<th>Aksi</th>
   						</tr>
   					</tfoot>

@@ -61,15 +61,13 @@
   								<td><?php echo date_format(date_create($pdft->tgl_pendaftaran), "d-m-Y"); ?></td>
   								<td><?php echo $pdft->nama_perusahaan; ?></td>
   								<td><?php echo $pdft->alamat_perusahaan; ?></td>
-  								<form action="<?php echo base_url('pendaftaran/update_act_diterima/' . $pdft->kd_pendaftaran . '/' . $pdft->npm); ?>" method="post">
-  									<td>
-  										<input type="submit" <?php if ($pdft->diterima == null) {
-																	echo 'class="btn btn-warning" value="Belum Diterima"';
-																} else {
-																	echo 'class="btn btn-success" value="Diterima"';
-																}; ?> name="diterima">
-  									</td>
-  								</form>
+  								<td>
+  									<?php if ($pdft->diterima == null) {
+											echo 'Belum Diterima';
+										} else {
+											echo 'Diterima';
+										}; ?>
+  								</td>
   								<td>
   									<a href="<?php echo base_url('/uploads/pendaftaran/' . $pdft->upload_dhs); ?>" target='_blank' class="btn btn-info  btn-flat">View</a>
   									<a href="<?php echo base_url('/pendaftaran/download/' . $pdft->upload_dhs); ?>" class="btn btn-primary  btn-flat">Download</a>
