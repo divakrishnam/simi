@@ -55,7 +55,13 @@
                               </div>
                               <div class="form-group">
                                   <label>Alamat Perusahaan</label>
-                                  <textarea class="form-control" rows="6" placeholder="Enter ..." name="alamat_perusahaan" required><?php echo $pdftr->alamat_perusahaan; ?></textarea>
+                                  <textarea class="form-control" rows="3" placeholder="Enter ..." name="alamat_perusahaan" required><?php echo $pdftr->alamat_perusahaan; ?></textarea>
+                              </div>
+                              <div class="form-group">
+                                  <label for="exampleInputFile">Upload Balasan</label>
+                                  <input type="file" id="exampleInputFile" name="balasan">
+                                  <input type="hidden" name="ubah_balasan" value="<?php echo ($pdftr->upload_balasan != null)?$pdftr->upload_dhs:''; ?>">
+                                  <!-- <p class="help-block">Example block-level help text here.</p> -->
                               </div>
                               <!-- /.col -->
                           </div>

@@ -125,11 +125,15 @@
   								<td><?php echo ucwords($pdft->alamat_perusahaan); ?></td>
   								<form action="<?php echo base_url('pendaftaran/update_act_diterima/' . $pdft->kd_pendaftaran . '/' . $pdft->npm); ?>" method="post">
   									<td>
-  										<input type="submit" <?php if ($pdft->diterima == null) {
+										  <input type="submit" <?php 
+										 if($pdft->diterima == null && $pdft->upload_balasan == null) {
+											echo 'class="btn btn-warning" value="Belum Diterima" disabled';
+										 }
+										  elseif ($pdft->diterima == null) {
 																	echo 'class="btn btn-warning" value="Belum Diterima"';
 																} else {
 																	echo 'class="btn btn-success" value="Diterima"';
-																}; ?> name="diterima">
+																} ?> name="diterima">
   									</td>
   								</form>
   								<td>

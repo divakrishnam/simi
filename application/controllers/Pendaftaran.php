@@ -96,6 +96,27 @@ class Pendaftaran extends CI_Controller
         }
     }
 
+    function upload_balasan($npm, $ubah_balasan)
+    {
+        $config['upload_path']          = './uploads/balasan';
+        $config['allowed_types']        = 'gif|jpg|png|jpeg';
+        $config['file_name']            = $npm;
+        $config['max_size']             = 1000;
+        $config['overwrite']            = true;
+
+        $this->load->library('upload', $config);
+
+        if (!$this->upload->do_upload('balasan')) {
+            $error = array('error' => $this->upload->display_errors());
+            print_r($error);
+            return $ubah_balasan;
+        } else {
+            // $data = array('upload_data' => $this->upload->data());
+            // print_r($data);
+            return $this->upload->data("file_name");
+        }
+    }
+
     function mahasiswa()
     {
         $where = array('mahasiswa.npm' => $this->session->userdata('id'));
@@ -146,6 +167,8 @@ class Pendaftaran extends CI_Controller
         $nama_perusahaan = $this->input->post('nama_perusahaan');
         $ubah_dhs = $this->input->post('ubah_dhs');
         $dhs = $this->upload_dhs($npm, $ubah_dhs);
+        $ubah_balasan = $this->input->post('ubah_balasan');
+        $balasan = $this->upload_balasan($npm, $ubah_balasan);
         $alamat_perusahaan = $this->input->post('alamat_perusahaan');
 
         $data = array(
@@ -153,6 +176,7 @@ class Pendaftaran extends CI_Controller
             'nama_perusahaan' => $nama_perusahaan,
             'alamat_perusahaan' => $alamat_perusahaan,
             'upload_dhs' => $dhs,
+            'upload_balasan' => $balasan,
         );
 
         $where = array('kd_pendaftaran' => $kd_pendaftaran, 'pendaftaran.npm' => $npm);
