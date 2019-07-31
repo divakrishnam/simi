@@ -40,10 +40,16 @@
                                   <input type="text" class="form-control" placeholder="Enter ..." name="nama_perusahaan" value="<?php echo $pdftr->nama_perusahaan; ?>" required>
                               </div>
 
-                              <div class="form-group">
+                              <!-- <div class="form-group">
                                   <label for="exampleInputFile">Upload DHS</label>
                                   <input type="file" id="exampleInputFile" name="dhs">
-                                  <input type="hidden" name="ubah_dhs" value="<?php echo $pdftr->upload_dhs; ?>">
+                                  <input type="hidden" name="ubah_dhs" value="<?php //echo $pdftr->upload_dhs; ?>">
+                                  <!-- <p class="help-block">Example block-level help text here.</p> -->
+                              <!-- </div> -->
+                              <div class="form-group">
+                                  <label for="exampleInputFile">Upload Balasan</label>
+                                  <input type="file" id="exampleInputFile" name="balasan">
+                                  <input type="hidden" name="ubah_balasan" value="<?php echo ($pdftr->upload_balasan != null)?$pdftr->upload_dhs:''; ?>">
                                   <!-- <p class="help-block">Example block-level help text here.</p> -->
                               </div>
                           </div>
@@ -57,12 +63,7 @@
                                   <label>Alamat Perusahaan</label>
                                   <textarea class="form-control" rows="3" placeholder="Enter ..." name="alamat_perusahaan" required><?php echo $pdftr->alamat_perusahaan; ?></textarea>
                               </div>
-                              <div class="form-group">
-                                  <label for="exampleInputFile">Upload Balasan</label>
-                                  <input type="file" id="exampleInputFile" name="balasan">
-                                  <input type="hidden" name="ubah_balasan" value="<?php echo ($pdftr->upload_balasan != null)?$pdftr->upload_dhs:''; ?>">
-                                  <!-- <p class="help-block">Example block-level help text here.</p> -->
-                              </div>
+                              
                               <!-- /.col -->
                           </div>
                           <!-- /.row -->

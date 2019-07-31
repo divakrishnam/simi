@@ -44,7 +44,8 @@
   							<th>Nama Perusahaan</th>
   							<th>Alamat Perusahaan</th>
   							<th>Status</th>
-  							<th>DHS</th>
+							  <th>DHS</th>
+							  <th>Balasan</th>
   						</tr>
   					</thead>
   					<tbody>
@@ -71,6 +72,11 @@
   								<td>
   									<a href="<?php echo base_url('/uploads/pendaftaran/' . $pdft->upload_dhs); ?>" target='_blank' class="btn btn-info  btn-flat">View</a>
   									<a href="<?php echo base_url('/pendaftaran/download/' . $pdft->upload_dhs); ?>" class="btn btn-primary  btn-flat">Download</a>
+								  </td>
+								  <td>
+									  <?php echo ($pdft->upload_balasan == null)?'Belum dibalas':'<a href="'.base_url('/uploads/balasan/' . $pdft->upload_balasan).'" target="_blank" class="btn btn-info  btn-flat">View</a>';
+									  ?>
+
   								</td>
   							</tr>
   						<?php }

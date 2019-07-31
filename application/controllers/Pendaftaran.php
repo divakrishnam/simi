@@ -165,8 +165,8 @@ class Pendaftaran extends CI_Controller
         $date = date_create($this->input->post('tanggal_pendaftaran'));
         $tanggal_pendaftaran = date_format($date, "Y-m-d");
         $nama_perusahaan = $this->input->post('nama_perusahaan');
-        $ubah_dhs = $this->input->post('ubah_dhs');
-        $dhs = $this->upload_dhs($npm, $ubah_dhs);
+        // $ubah_dhs = $this->input->post('ubah_dhs');
+        // $dhs = $this->upload_dhs($npm, $ubah_dhs);
         $ubah_balasan = $this->input->post('ubah_balasan');
         $balasan = $this->upload_balasan($npm, $ubah_balasan);
         $alamat_perusahaan = $this->input->post('alamat_perusahaan');
@@ -175,7 +175,7 @@ class Pendaftaran extends CI_Controller
             'tgl_pendaftaran' => $tanggal_pendaftaran,
             'nama_perusahaan' => $nama_perusahaan,
             'alamat_perusahaan' => $alamat_perusahaan,
-            'upload_dhs' => $dhs,
+            // 'upload_dhs' => $dhs,
             'upload_balasan' => $balasan,
         );
 
