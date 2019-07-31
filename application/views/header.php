@@ -59,9 +59,9 @@
 			<!-- Logo -->
 			<a href="<?php echo base_url(''); ?>" class="logo">
 				<!-- mini logo for sidebar mini 50x50 pixels -->
-				<span class="logo-mini">SI<b>MI</b></span>
+				<span class="logo-mini">SIM<b>PKL</b></span>
 				<!-- logo for regular state and mobile devices -->
-				<span class="logo-lg">SI<b>MI</b></span>
+				<span class="logo-lg">SIM<b>PKL</b></span>
 			</a>
 			<!-- Header Navbar: style can be found in header.less -->
 			<nav class="navbar navbar-static-top">

@@ -30,11 +30,11 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="<?php echo base_url();?>assets/admin-lte/index2.html">SI<b>MI</b></a>
+    <a href="<?php echo base_url();?>assets/admin-lte/index2.html">SIM<b>PKL</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">
-    <p class="login-box-msg">Login to Sistem Informasi Manajemen Internship</p>
+    <p class="login-box-msg">Login to Sistem Informasi Manajemen PKL</p>
 
     <form action="<?php echo base_url('/login/login_act');?>" method="post">
       <div class="form-group has-feedback">

@@ -1,6 +1,6 @@
 <li class="treeview">
 	<a href="#">
-		<i class="fa fa-industry"></i> <span> Kelola Internship</span>
+		<i class="fa fa-industry"></i> <span> Kelola PKL</span>
 		<span class="pull-right-container">
 			<i class="fa fa-angle-left pull-right"></i>
 		</span>
